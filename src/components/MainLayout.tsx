@@ -1,8 +1,7 @@
-
 import React, { useState } from "react";
 import { Link, Outlet, useLocation } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { Trash2, LayoutDashboard, Sliders, BarChart, Users, LogOut } from "lucide-react";
+import { Trash2, LayoutDashboard, Sliders, BarChart, Users, LogOut, Coins } from "lucide-react";
 
 const MainLayout = () => {
   const location = useLocation();
@@ -16,6 +15,7 @@ const MainLayout = () => {
     { name: "Dashboard", href: "/dashboard", icon: LayoutDashboard, allowedRoles: ["admin", "technician", "viewer"] },
     { name: "Control Panel", href: "/control-panel", icon: Sliders, allowedRoles: ["admin", "technician"] },
     { name: "Analytics", href: "/analytics", icon: BarChart, allowedRoles: ["admin", "technician", "viewer"] },
+    { name: "Revenue", href: "/revenue", icon: Coins, allowedRoles: ["admin", "technician", "viewer"] },
     { name: "User Management", href: "/users", icon: Users, allowedRoles: ["admin"] },
   ];
 

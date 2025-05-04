@@ -11,6 +11,7 @@ import Dashboard from "./pages/Dashboard";
 import ControlPanel from "./pages/ControlPanel";
 import Analytics from "./pages/Analytics";
 import UserManagement from "./pages/UserManagement";
+import Revenue from "./pages/Revenue";
 import MainLayout from "./components/MainLayout";
 
 const queryClient = new QueryClient();
@@ -31,6 +32,7 @@ const App = () => (
             <Route path="/control-panel" element={<ControlPanel />} />
             <Route path="/analytics" element={<Analytics />} />
             <Route path="/users" element={<UserManagement />} />
+            <Route path="/revenue" element={<Revenue />} />
           </Route>
           
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
