@@ -8,6 +8,7 @@ import { Label } from "@/components/ui/label";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { useForm } from "react-hook-form";
 import { Trash2 } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 
 interface AuthProps {
   mode: "login" | "register";
@@ -29,21 +30,9 @@ interface RegisterFormData {
 }
 
 const Auth = ({ mode, onSwitch }: AuthProps) => {
-  // Mock login/register functionality
-  const handleLoginSubmit = (data: LoginFormData) => {
-    console.log("Login submitted:", data);
-    // Here would be authentication logic
-    if (data.email === "admin@trashsense.com" && data.password === "admin123") {
-      console.log("Login successful!");
-      window.location.href = "/dashboard";
-    }
-  };
+  const navigate = useNavigate();
 
-  const handleRegisterSubmit = (data: RegisterFormData) => {
-    console.log("Registration submitted:", data);
-    // Here would be registration logic
-  };
-
+  // Login form setup
   const loginForm = useForm<LoginFormData>({
     defaultValues: {
       email: "",
@@ -51,6 +40,7 @@ const Auth = ({ mode, onSwitch }: AuthProps) => {
     },
   });
 
+  // Register form setup
   const registerForm = useForm<RegisterFormData>({
     defaultValues: {
       name: "",
@@ -60,6 +50,27 @@ const Auth = ({ mode, onSwitch }: AuthProps) => {
       role: "viewer",
     },
   });
+
+  // Mock login/register functionality
+  const handleLoginSubmit = (data: LoginFormData) => {
+    console.log("Login submitted:", data);
+    // Here would be authentication logic
+    if (data.email === "admin@trashsense.com" && data.password === "admin123") {
+      console.log("Login successful!");
+      navigate("/dashboard");
+    } else {
+      console.log("Invalid credentials");
+      loginForm.setError("email", { 
+        type: "manual",
+        message: "Invalid email or password"
+      });
+    }
+  };
+
+  const handleRegisterSubmit = (data: RegisterFormData) => {
+    console.log("Registration submitted:", data);
+    // Here would be registration logic
+  };
 
   return (
     <div className="flex items-center justify-center min-h-screen bg-gradient-to-br from-green-50 to-blue-50">
