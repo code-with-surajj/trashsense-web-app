@@ -1,8 +1,9 @@
 
 import { useState, useEffect } from 'react';
 import { Button } from "@/components/ui/button";
-import { Menu, X } from "lucide-react";
-import { Link } from "react-scroll";
+import { Menu, X, LogIn } from "lucide-react";
+import { Link as ScrollLink } from "react-scroll";
+import { Link } from "react-router-dom";
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -35,7 +36,7 @@ const Navbar = () => {
       }`}
     >
       <div className="container flex items-center justify-between">
-        <Link 
+        <ScrollLink 
           to="hero" 
           spy={true} 
           smooth={true} 
@@ -46,10 +47,16 @@ const Navbar = () => {
           <div className="flex items-center space-x-2">
             <span className="text-2xl font-bold text-trashsense-primary">Trash<span className="text-trashsense-secondary">Sense</span></span>
           </div>
-        </Link>
+        </ScrollLink>
         
         {/* Mobile menu button */}
-        <div className="md:hidden">
+        <div className="md:hidden flex items-center gap-3">
+          <Link to="/login">
+            <Button variant="outline" className="flex items-center gap-2 border-trashsense-primary text-trashsense-primary hover:bg-trashsense-primary hover:text-white">
+              <LogIn className="h-4 w-4" />
+              <span>Login</span>
+            </Button>
+          </Link>
           <Button 
             variant="ghost" 
             size="icon"
@@ -61,9 +68,9 @@ const Navbar = () => {
         </div>
 
         {/* Desktop navigation */}
-        <nav className="hidden md:flex items-center space-x-8">
+        <nav className="hidden md:flex items-center space-x-4">
           {navItems.map((item) => (
-            <Link
+            <ScrollLink
               key={item.name}
               to={item.to}
               spy={true}
@@ -73,8 +80,14 @@ const Navbar = () => {
               className="text-gray-700 hover:text-trashsense-primary transition-colors font-medium cursor-pointer"
             >
               {item.name}
-            </Link>
+            </ScrollLink>
           ))}
+          <Link to="/login">
+            <Button variant="outline" className="flex items-center gap-2 border-trashsense-primary text-trashsense-primary hover:bg-trashsense-primary hover:text-white transition-colors">
+              <LogIn className="h-4 w-4" />
+              <span>Login</span>
+            </Button>
+          </Link>
           <Button 
             className="bg-trashsense-primary hover:bg-trashsense-dark text-white transition-colors"
           >
@@ -88,7 +101,7 @@ const Navbar = () => {
         <div className="md:hidden bg-white shadow-lg absolute top-full left-0 right-0 py-4">
           <div className="flex flex-col space-y-4 px-6">
             {navItems.map((item) => (
-              <Link
+              <ScrollLink
                 key={item.name}
                 to={item.to}
                 spy={true}
@@ -99,7 +112,7 @@ const Navbar = () => {
                 className="text-gray-700 hover:text-trashsense-primary transition-colors py-2 font-medium cursor-pointer"
               >
                 {item.name}
-              </Link>
+              </ScrollLink>
             ))}
             <Button className="bg-trashsense-primary hover:bg-trashsense-dark text-white w-full transition-colors">
               Get Started
