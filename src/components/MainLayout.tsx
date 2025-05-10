@@ -1,5 +1,6 @@
+
 import React, { useState } from "react";
-import { Link, Outlet, useLocation } from "react-router-dom";
+import { Link, Outlet, useLocation, NavLink } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Trash2, LayoutDashboard, Sliders, BarChart, Users, LogOut, Coins } from "lucide-react";
 
@@ -43,22 +44,22 @@ const MainLayout = () => {
           <div className="flex-1 flex flex-col pt-5 pb-4 overflow-y-auto">
             <nav className="mt-5 flex-1 px-2 space-y-1">
               {navigation.filter(item => canAccess(item.allowedRoles)).map((item) => (
-                <Link
+                <NavLink
                   key={item.name}
                   to={item.href}
-                  className={`group flex items-center px-3 py-2 text-sm font-medium rounded-md ${
-                    isActive(item.href)
+                  className={({isActive}) => `group flex items-center px-3 py-2 text-sm font-medium rounded-md ${
+                    isActive
                       ? "bg-primary text-white" 
                       : "text-gray-600 hover:bg-gray-50"
                   }`}
                 >
                   <item.icon 
-                    className={`mr-3 h-5 w-5 ${
-                      isActive(item.href) ? "text-white" : "text-gray-400 group-hover:text-gray-500"
+                    className={({isActive}: {isActive: boolean}) => `mr-3 h-5 w-5 ${
+                      isActive ? "text-white" : "text-gray-400 group-hover:text-gray-500"
                     }`} 
                   />
                   {item.name}
-                </Link>
+                </NavLink>
               ))}
             </nav>
           </div>
@@ -118,18 +119,18 @@ const MainLayout = () => {
         {/* Mobile navigation */}
         <div className="md:hidden fixed bottom-0 left-0 right-0 bg-white border-t flex justify-around p-2">
           {navigation.filter(item => canAccess(item.allowedRoles)).map((item) => (
-            <Link
+            <NavLink
               key={item.name}
               to={item.href}
-              className={`flex flex-col items-center justify-center p-2 rounded-md ${
-                isActive(item.href)
+              className={({isActive}) => `flex flex-col items-center justify-center p-2 rounded-md ${
+                isActive
                   ? "text-primary" 
                   : "text-gray-600"
               }`}
             >
               <item.icon className="h-5 w-5" />
               <span className="text-xs mt-1">{item.name}</span>
-            </Link>
+            </NavLink>
           ))}
         </div>
       </div>
