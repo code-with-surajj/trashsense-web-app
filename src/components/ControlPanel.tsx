@@ -6,8 +6,10 @@ import { Switch } from "@/components/ui/switch";
 import { Label } from "@/components/ui/label";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Trash2, RotateCw, Power, Settings, AlertTriangle } from "lucide-react";
+import { useToast } from "@/hooks/use-toast";
 
 const ControlPanel = () => {
+  const { toast } = useToast();
   const [autoMode, setAutoMode] = useState(true);
   const [compartments, setCompartments] = useState({
     plastic: false,
@@ -20,16 +22,73 @@ const ControlPanel = () => {
 
   const toggleCompartment = (type: keyof typeof compartments) => {
     if (!autoMode) {
-      setCompartments({ ...compartments, [type]: !compartments[type] });
+      const newState = !compartments[type];
+      setCompartments({ ...compartments, [type]: newState });
+      
+      toast({
+        title: `${type.charAt(0).toUpperCase() + type.slice(1)} compartment ${newState ? 'opened' : 'closed'}`,
+        description: `The ${type} compartment has been ${newState ? 'opened' : 'closed'} successfully.`,
+        duration: 3000,
+      });
+    }
+  };
+
+  const handleAutoModeToggle = (checked: boolean) => {
+    setAutoMode(checked);
+    
+    if (checked) {
+      // Reset all compartments when switching to auto mode
+      setCompartments({
+        plastic: false,
+        paper: false,
+        organic: false,
+        metal: false
+      });
+      
+      toast({
+        title: "Automatic mode enabled",
+        description: "System will now automatically detect and sort waste.",
+        duration: 3000,
+      });
+    } else {
+      toast({
+        title: "Manual mode enabled",
+        description: "You can now control bin compartments manually.",
+        duration: 3000,
+      });
     }
   };
 
   const handleRecalibrate = () => {
     setRecalibrating(true);
+    toast({
+      title: "Recalibration started",
+      description: "Sensors are being recalibrated. Please wait...",
+      duration: 3000,
+    });
+    
     // Mock recalibration process
     setTimeout(() => {
       setRecalibrating(false);
+      toast({
+        title: "Recalibration complete",
+        description: "All sensors have been successfully recalibrated.",
+        duration: 3000,
+      });
     }, 3000);
+  };
+
+  const toggleMaintenanceMode = () => {
+    const newMode = !maintenanceMode;
+    setMaintenanceMode(newMode);
+    
+    toast({
+      title: newMode ? "Maintenance mode activated" : "Maintenance mode deactivated",
+      description: newMode 
+        ? "System is now in maintenance mode. Some functions are limited." 
+        : "System has returned to normal operation.",
+      duration: 3000,
+    });
   };
 
   return (
@@ -57,7 +116,7 @@ const ControlPanel = () => {
               <Switch
                 id="auto-mode"
                 checked={autoMode}
-                onCheckedChange={setAutoMode}
+                onCheckedChange={handleAutoModeToggle}
               />
             </div>
 
@@ -175,6 +234,13 @@ const ControlPanel = () => {
               <Button 
                 variant="outline"
                 className="flex items-center gap-2"
+                onClick={() => {
+                  toast({
+                    title: "AI Model Reset",
+                    description: "The AI model has been reset successfully.",
+                    duration: 3000,
+                  });
+                }}
               >
                 <Settings className="h-4 w-4" />
                 Reset AI Model
@@ -183,7 +249,7 @@ const ControlPanel = () => {
               <Button 
                 variant={maintenanceMode ? "default" : "outline"}
                 className="flex items-center gap-2"
-                onClick={() => setMaintenanceMode(!maintenanceMode)}
+                onClick={toggleMaintenanceMode}
               >
                 <Power className="h-4 w-4" />
                 {maintenanceMode ? "Exit Maintenance" : "Maintenance Mode"}
