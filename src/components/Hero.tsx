@@ -1,11 +1,8 @@
-
 import { Button } from "@/components/ui/button";
 import { ArrowRight } from "lucide-react";
 import { Link } from "react-scroll";
-
 const Hero = () => {
-  return (
-    <section id="hero" className="relative min-h-screen flex items-center pt-24">
+  return <section id="hero" className="relative min-h-screen flex items-center pt-24">
       {/* Background decoration */}
       <div className="absolute top-0 right-0 -z-10 w-1/2 h-1/2 bg-trashsense-light/50 rounded-bl-full"></div>
       <div className="absolute bottom-0 left-0 -z-10 w-1/3 h-1/3 bg-trashsense-light/30 rounded-tr-full"></div>
@@ -29,14 +26,7 @@ const Hero = () => {
               <Button className="bg-trashsense-primary hover:bg-trashsense-dark text-white px-6 h-12 rounded-full">
                 Get Your TrashSense
               </Button>
-              <Link
-                to="features"
-                spy={true}
-                smooth={true}
-                offset={-70}
-                duration={500}
-                className="cursor-pointer"
-              >
+              <Link to="features" spy={true} smooth={true} offset={-70} duration={500} className="cursor-pointer">
                 <Button variant="outline" className="border-trashsense-primary text-trashsense-primary px-6 h-12 rounded-full">
                   Learn More <ArrowRight className="ml-2 h-4 w-4" />
                 </Button>
@@ -62,11 +52,7 @@ const Hero = () => {
           <div className="relative">
             <div className="aspect-square rounded-full bg-trashsense-light flex items-center justify-center overflow-hidden">
               <div className="w-3/4 h-3/4 bg-white rounded-full shadow-lg flex items-center justify-center animate-float">
-                <img 
-                  src="https://images.unsplash.com/photo-1532996122724-e3c354a0b15b?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
-                  alt="TrashSense Smart Bin" 
-                  className="w-3/4 h-3/4 object-contain" 
-                />
+                <img alt="TrashSense Smart Bin" className="w-3/4 h-3/4 object-contain" src="/lovable-uploads/23e063df-c121-4514-8b1a-dcd1dc49831d.png" />
               </div>
             </div>
             <div className="absolute -bottom-5 -right-5 bg-trashsense-secondary text-white p-4 rounded-lg shadow-lg">
@@ -76,8 +62,6 @@ const Hero = () => {
           </div>
         </div>
       </div>
-    </section>
-  );
+    </section>;
 };
-
 export default Hero;
