@@ -17,6 +17,9 @@ const Footer = () => {
             <p className="text-gray-400 text-sm">
               Revolutionizing waste management with AI technology for a cleaner, more sustainable world.
             </p>
+            <p className="text-gray-400 text-sm flex items-center gap-2">
+              <Mail className="h-4 w-4" /> Trashhsense@gmail.com
+            </p>
             <div className="flex space-x-4 pt-4">
               <Button variant="ghost" size="icon" className="h-9 w-9 rounded-full text-gray-400 hover:text-white hover:bg-trashsense-primary">
                 <Facebook className="h-4 w-4" />
