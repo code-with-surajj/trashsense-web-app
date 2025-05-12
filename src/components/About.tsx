@@ -2,23 +2,23 @@ import { Button } from "@/components/ui/button";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Facebook, Twitter, Linkedin } from "lucide-react";
 const teamMembers = [{
-  name: "Dr. Sarah Chen",
+  name: "Suraj Kumar",
   role: "Founder & CEO",
   image: "https://randomuser.me/api/portraits/women/44.jpg",
   bio: "PhD in Environmental Engineering with 10+ years experience in sustainable waste management systems."
 }, {
-  name: "Michael Rodriguez",
-  role: "CTO",
+  name: "Ayesha Rehmani",
+  role: "Co-founder & Marketing Head",
   image: "https://randomuser.me/api/portraits/men/32.jpg",
   bio: "Former AI researcher at MIT with expertise in computer vision and machine learning applications."
 }, {
-  name: "Aisha Patel",
-  role: "Head of Design",
+  name: "Nikhil Kumar",
+  role: "Head of Design & Production",
   image: "https://randomuser.me/api/portraits/women/68.jpg",
   bio: "Industrial designer with a passion for creating products that merge functionality with environmental responsibility."
 }, {
-  name: "David Kim",
-  role: "Lead Engineer",
+  name: "Aayush Kumar",
+  role: "Service Manager",
   image: "https://randomuser.me/api/portraits/men/75.jpg",
   bio: "Robotics engineer specializing in sensor integration and automation systems for smart devices."
 }];
