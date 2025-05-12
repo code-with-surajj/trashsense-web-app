@@ -54,7 +54,7 @@ const Hero = () => {
           <div className="relative">
             <div className="aspect-square rounded-full bg-trashsense-light flex items-center justify-center overflow-hidden">
               <div className="w-3/4 h-3/4 bg-white rounded-full shadow-lg flex items-center justify-center animate-float">
-                <img alt="TrashSense Smart Bin" className="w-3/4 h-3/4 object-contain" src="/lovable-uploads/23e063df-c121-4514-8b1a-dcd1dc49831d.png" />
+                <img alt="TrashSense Smart Bin" className="w-3/4 h-3/4 object-contain ml-4" src="/lovable-uploads/23e063df-c121-4514-8b1a-dcd1dc49831d.png" />
               </div>
             </div>
             <div className="absolute -bottom-5 -right-5 bg-trashsense-secondary text-white p-4 rounded-lg shadow-lg">
