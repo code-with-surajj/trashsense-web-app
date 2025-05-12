@@ -88,6 +88,38 @@ const HowItWorks = () => {
             </div>
           </div>
         </div>
+        
+        {/* Reference Images Section - Moved from Hero component */}
+        <div className="mt-16 max-w-4xl mx-auto">
+          <div className="bg-white p-6 rounded-xl shadow-md">
+            <h3 className="text-xl font-bold mb-4 text-trashsense-primary">Reference Designs</h3>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div className="overflow-hidden rounded-lg shadow-md group">
+                <img 
+                  src="/lovable-uploads/c3476236-54e7-417c-8795-41aa8463a6f4.png" 
+                  alt="Metal smart bin reference with dual screens" 
+                  className="w-full h-56 object-cover group-hover:scale-105 transition-transform duration-300"
+                />
+                <div className="p-3 bg-trashsense-light/30">
+                  <p className="font-medium text-trashsense-dark">Dual-Interface Smart Bin</p>
+                  <p className="text-xs text-gray-600">Interactive waste management solution</p>
+                </div>
+              </div>
+              <div className="overflow-hidden rounded-lg shadow-md group">
+                <img 
+                  src="/lovable-uploads/35c12aad-b240-4023-9217-8d791e205d02.png" 
+                  alt="Modern smart waste management kiosk reference" 
+                  className="w-full h-56 object-cover group-hover:scale-105 transition-transform duration-300"
+                />
+                <div className="p-3 bg-trashsense-light/30">
+                  <p className="font-medium text-trashsense-dark">Smart Recycling Kiosk</p>
+                  <p className="text-xs text-gray-600">Advanced sorting with user guidance</p>
+                </div>
+              </div>
+            </div>
+            <p className="text-sm text-gray-500 mt-4 text-center italic">Design inspirations for TrashSense units currently in production</p>
+          </div>
+        </div>
       </div>
     </section>
   );

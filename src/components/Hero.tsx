@@ -61,28 +61,6 @@ const Hero = () => {
               <p className="font-bold">AI-Powered</p>
               <p className="text-sm">Machine Learning Technology</p>
             </div>
-            
-            {/* Reference Images Section */}
-            <div className="mt-8 bg-gray-50 p-4 rounded-lg shadow">
-              <h3 className="text-lg font-medium mb-2">Reference Designs</h3>
-              <div className="grid grid-cols-2 gap-3">
-                <div className="overflow-hidden rounded-lg shadow-sm">
-                  <img 
-                    src="/lovable-uploads/c3476236-54e7-417c-8795-41aa8463a6f4.png" 
-                    alt="Metal smart bin reference with dual screens" 
-                    className="w-full h-32 object-cover hover:scale-105 transition-transform duration-300"
-                  />
-                </div>
-                <div className="overflow-hidden rounded-lg shadow-sm">
-                  <img 
-                    src="/lovable-uploads/35c12aad-b240-4023-9217-8d791e205d02.png" 
-                    alt="Modern smart waste management kiosk reference" 
-                    className="w-full h-32 object-cover hover:scale-105 transition-transform duration-300"
-                  />
-                </div>
-              </div>
-              <p className="text-xs text-gray-500 mt-2">Design inspiration for our TrashSense units</p>
-            </div>
           </div>
         </div>
       </div>
