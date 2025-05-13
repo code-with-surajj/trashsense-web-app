@@ -1,263 +1,167 @@
 
-import React, { useState } from "react";
+import React from "react";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
-import { ChartContainer, ChartTooltip } from "@/components/ui/chart";
-import { LineChart, Line, BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Legend, PieChart, Pie, Cell } from "recharts";
-import { Download, Calendar, Filter } from "lucide-react";
-import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { ChartContainer, ChartTooltip, ChartTooltipContent, ChartLegend, ChartLegendContent } from "@/components/ui/chart";
+import { BarChart, Bar, LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Legend } from "recharts";
 
-const COLORS = ['#2BAE66', '#1E88E5', '#FFA726', '#EF5350'];
-
-const monthlyData = [
-  { month: "Jan", plastic: 120, paper: 85, organic: 150, metal: 45, total: 400 },
-  { month: "Feb", plastic: 132, paper: 91, organic: 148, metal: 48, total: 419 },
-  { month: "Mar", plastic: 141, paper: 97, organic: 161, metal: 51, total: 450 },
-  { month: "Apr", plastic: 154, paper: 105, organic: 173, metal: 57, total: 489 },
-  { month: "May", plastic: 162, paper: 112, organic: 189, metal: 63, total: 526 },
-  { month: "Jun", plastic: 175, paper: 118, organic: 201, metal: 68, total: 562 },
-  { month: "Jul", plastic: 184, paper: 124, organic: 214, metal: 72, total: 594 },
+const wasteData = [
+  { month: "Jan", plastic: 120, paper: 90, glass: 45, other: 30 },
+  { month: "Feb", plastic: 100, paper: 85, glass: 55, other: 40 },
+  { month: "Mar", plastic: 95, paper: 100, glass: 50, other: 45 },
+  { month: "Apr", plastic: 85, paper: 110, glass: 65, other: 35 },
+  { month: "May", plastic: 75, paper: 95, glass: 70, other: 30 },
+  { month: "Jun", plastic: 65, paper: 80, glass: 75, other: 25 },
 ];
 
-const accuracyData = [
-  { name: "Plastic", accuracy: 97 },
-  { name: "Paper", accuracy: 95 },
-  { name: "Organic", accuracy: 92 },
-  { name: "Metal", accuracy: 99 },
+const efficiencyData = [
+  { name: "Week 1", efficiency: 65 },
+  { name: "Week 2", efficiency: 68 },
+  { name: "Week 3", efficiency: 72 },
+  { name: "Week 4", efficiency: 75 },
+  { name: "Week 5", efficiency: 80 },
+  { name: "Week 6", efficiency: 83 },
+  { name: "Week 7", efficiency: 87 },
+  { name: "Week 8", efficiency: 90 },
 ];
 
-const wasteTrends = [
-  { month: "Jan", waste: 400 },
-  { month: "Feb", waste: 419 },
-  { month: "Mar", waste: 450 },
-  { month: "Apr", waste: 489 },
-  { month: "May", waste: 526 },
-  { month: "Jun", waste: 562 },
-  { month: "Jul", waste: 594 },
-];
+const chartConfig = {
+  plastic: { label: "Plastic", theme: { light: "#0ea5e9" } },
+  paper: { label: "Paper", theme: { light: "#10b981" } },
+  glass: { label: "Glass", theme: { light: "#8b5cf6" } },
+  other: { label: "Other", theme: { light: "#f59e0b" } },
+};
 
-const materialDistribution = [
-  { name: "Plastic", value: 35 },
-  { name: "Paper", value: 25 },
-  { name: "Organic", value: 30 },
-  { name: "Metal", value: 10 },
-];
-
-const Analytics = () => {
-  const [timeRange, setTimeRange] = useState("monthly");
-  const [isFiltersOpen, setIsFiltersOpen] = useState(false);
-  
-  const chartConfig = {
-    plastic: { color: "#1E88E5" },
-    paper: { color: "#FFA726" },
-    organic: { color: "#2BAE66" },
-    metal: { color: "#EF5350" },
-    waste: { color: "#2BAE66" },
-  };
-
+const AnalyticsComponent = () => {
   return (
-    <div className="flex flex-col gap-6 p-4 md:p-6">
-      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
-        <h1 className="text-3xl font-bold">Analytics</h1>
-        
-        <div className="flex items-center gap-2">
-          <Button variant="outline" size="sm" className="flex items-center gap-2">
-            <Calendar className="h-4 w-4" />
-            {timeRange === "daily" && "Daily"}
-            {timeRange === "weekly" && "Weekly"}
-            {timeRange === "monthly" && "Monthly"}
-            {timeRange === "yearly" && "Yearly"}
-          </Button>
-          
-          <Button variant="outline" size="sm" onClick={() => setIsFiltersOpen(!isFiltersOpen)}>
-            <Filter className="h-4 w-4" />
-          </Button>
-          
-          <Button variant="outline" size="sm">
-            <Download className="h-4 w-4" />
-          </Button>
-        </div>
+    <div className="container p-6 space-y-6">
+      <div className="flex flex-col space-y-2">
+        <h1 className="text-3xl font-bold">Analytics Dashboard</h1>
+        <p className="text-muted-foreground">
+          Monitor waste collection metrics and system performance
+        </p>
       </div>
-
-      <Collapsible open={isFiltersOpen} onOpenChange={setIsFiltersOpen}>
-        <CollapsibleContent>
-          <Card className="mb-6">
-            <CardContent className="p-4">
-              <div className="flex flex-wrap gap-4">
-                <div className="space-y-2">
-                  <h3 className="text-sm font-medium">Time Range</h3>
-                  <div className="flex flex-wrap gap-2">
-                    <Button 
-                      size="sm" 
-                      variant={timeRange === "daily" ? "default" : "outline"}
-                      onClick={() => setTimeRange("daily")}
-                    >
-                      Daily
-                    </Button>
-                    <Button 
-                      size="sm" 
-                      variant={timeRange === "weekly" ? "default" : "outline"}
-                      onClick={() => setTimeRange("weekly")}
-                    >
-                      Weekly
-                    </Button>
-                    <Button 
-                      size="sm" 
-                      variant={timeRange === "monthly" ? "default" : "outline"}
-                      onClick={() => setTimeRange("monthly")}
-                    >
-                      Monthly
-                    </Button>
-                    <Button 
-                      size="sm" 
-                      variant={timeRange === "yearly" ? "default" : "outline"}
-                      onClick={() => setTimeRange("yearly")}
-                    >
-                      Yearly
-                    </Button>
-                  </div>
-                </div>
-
-                <div className="space-y-2">
-                  <h3 className="text-sm font-medium">Waste Type</h3>
-                  <div className="flex flex-wrap gap-2">
-                    <Button size="sm" variant="outline">All Types</Button>
-                    <Button size="sm" variant="outline">Plastic</Button>
-                    <Button size="sm" variant="outline">Paper</Button>
-                    <Button size="sm" variant="outline">Organic</Button>
-                    <Button size="sm" variant="outline">Metal</Button>
-                  </div>
-                </div>
-              </div>
-            </CardContent>
-          </Card>
-        </CollapsibleContent>
-      </Collapsible>
-
-      {/* Charts grid */}
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+      
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
         <Card>
-          <CardHeader>
-            <CardTitle>Waste Collection Trends</CardTitle>
-            <CardDescription>Total waste collected over time (kg)</CardDescription>
-          </CardHeader>
-          <CardContent className="h-[300px]">
-            <ChartContainer config={chartConfig}>
-              <ResponsiveContainer width="100%" height="100%">
-                <LineChart data={wasteTrends}>
-                  <CartesianGrid strokeDasharray="3 3" />
-                  <XAxis dataKey="month" />
-                  <YAxis />
-                  <Tooltip content={<ChartTooltip />} />
-                  <Legend />
-                  <Line type="monotone" dataKey="waste" stroke="#2BAE66" name="Total Waste" strokeWidth={2} />
-                </LineChart>
-              </ResponsiveContainer>
-            </ChartContainer>
-          </CardContent>
-        </Card>
-        
-        <Card>
-          <CardHeader>
-            <CardTitle>Waste Distribution</CardTitle>
-            <CardDescription>Current waste by category</CardDescription>
-          </CardHeader>
-          <CardContent className="h-[300px]">
-            <ResponsiveContainer width="100%" height="100%">
-              <PieChart>
-                <Pie
-                  data={materialDistribution}
-                  cx="50%"
-                  cy="50%"
-                  labelLine={false}
-                  outerRadius={90}
-                  fill="#8884d8"
-                  dataKey="value"
-                  label={({ name, percent }) => `${name} ${(percent * 100).toFixed(0)}%`}
-                >
-                  {materialDistribution.map((entry, index) => (
-                    <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
-                  ))}
-                </Pie>
-                <Tooltip />
-              </PieChart>
-            </ResponsiveContainer>
-          </CardContent>
-        </Card>
-
-        <Card className="lg:col-span-2">
-          <CardHeader>
-            <CardTitle>Monthly Collection by Waste Type</CardTitle>
-            <CardDescription>Data by waste category (kg)</CardDescription>
-          </CardHeader>
-          <CardContent className="h-[300px]">
-            <ChartContainer config={chartConfig}>
-              <ResponsiveContainer width="100%" height="100%">
-                <BarChart data={monthlyData}>
-                  <CartesianGrid strokeDasharray="3 3" />
-                  <XAxis dataKey="month" />
-                  <YAxis />
-                  <Tooltip content={<ChartTooltip />} />
-                  <Legend />
-                  <Bar dataKey="plastic" fill="#1E88E5" name="Plastic" />
-                  <Bar dataKey="paper" fill="#FFA726" name="Paper" />
-                  <Bar dataKey="organic" fill="#2BAE66" name="Organic" />
-                  <Bar dataKey="metal" fill="#EF5350" name="Metal" />
-                </BarChart>
-              </ResponsiveContainer>
-            </ChartContainer>
-          </CardContent>
-        </Card>
-        
-        <Card>
-          <CardHeader>
-            <CardTitle>AI Detection Accuracy</CardTitle>
-            <CardDescription>Accuracy rate by waste type (%)</CardDescription>
-          </CardHeader>
-          <CardContent className="h-[300px]">
-            <ChartContainer config={chartConfig}>
-              <ResponsiveContainer width="100%" height="100%">
-                <BarChart data={accuracyData} layout="vertical">
-                  <CartesianGrid strokeDasharray="3 3" />
-                  <XAxis type="number" domain={[85, 100]} />
-                  <YAxis dataKey="name" type="category" />
-                  <Tooltip content={<ChartTooltip />} />
-                  <Bar dataKey="accuracy" fill="#2BAE66">
-                    {accuracyData.map((entry, index) => (
-                      <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
-                    ))}
-                  </Bar>
-                </BarChart>
-              </ResponsiveContainer>
-            </ChartContainer>
-          </CardContent>
-        </Card>
-        
-        <Card>
-          <CardHeader>
-            <CardTitle>Maintenance Records</CardTitle>
-            <CardDescription>Recent maintenance activities</CardDescription>
+          <CardHeader className="pb-2">
+            <CardTitle className="text-sm font-medium">Total Waste Collected</CardTitle>
           </CardHeader>
           <CardContent>
-            <div className="space-y-4">
-              {[
-                { date: "2025-05-01", action: "Sensor calibration", technician: "John Doe" },
-                { date: "2025-04-28", action: "Battery replacement", technician: "Jane Smith" },
-                { date: "2025-04-22", action: "Firmware update v2.1.4", technician: "John Doe" },
-                { date: "2025-04-15", action: "Mechanical service", technician: "Mike Johnson" }
-              ].map((item, i) => (
-                <div key={i} className="flex justify-between border-b pb-2 last:border-0 text-sm">
-                  <span>{item.date}</span>
-                  <span className="font-medium">{item.action}</span>
-                  <span className="text-muted-foreground">{item.technician}</span>
-                </div>
-              ))}
-            </div>
+            <div className="text-2xl font-bold">2,451 kg</div>
+            <p className="text-xs text-muted-foreground">+12% from last month</p>
+          </CardContent>
+        </Card>
+        
+        <Card>
+          <CardHeader className="pb-2">
+            <CardTitle className="text-sm font-medium">Recycling Rate</CardTitle>
+          </CardHeader>
+          <CardContent>
+            <div className="text-2xl font-bold">85.2%</div>
+            <p className="text-xs text-muted-foreground">+5% from last month</p>
+          </CardContent>
+        </Card>
+        
+        <Card>
+          <CardHeader className="pb-2">
+            <CardTitle className="text-sm font-medium">Sorting Accuracy</CardTitle>
+          </CardHeader>
+          <CardContent>
+            <div className="text-2xl font-bold">94.8%</div>
+            <p className="text-xs text-muted-foreground">+2% from last month</p>
+          </CardContent>
+        </Card>
+        
+        <Card>
+          <CardHeader className="pb-2">
+            <CardTitle className="text-sm font-medium">Carbon Offset</CardTitle>
+          </CardHeader>
+          <CardContent>
+            <div className="text-2xl font-bold">12.3 tons</div>
+            <p className="text-xs text-muted-foreground">Equivalent to 600 trees</p>
           </CardContent>
         </Card>
       </div>
+
+      <Tabs defaultValue="waste">
+        <TabsList className="mb-4">
+          <TabsTrigger value="waste">Waste Collection</TabsTrigger>
+          <TabsTrigger value="efficiency">System Efficiency</TabsTrigger>
+        </TabsList>
+        
+        <TabsContent value="waste" className="space-y-4">
+          <Card>
+            <CardHeader>
+              <CardTitle>Waste Collection by Type</CardTitle>
+              <CardDescription>Monthly breakdown of different waste types collected</CardDescription>
+            </CardHeader>
+            <CardContent className="pt-2 h-80">
+              <ChartContainer className="h-80" config={chartConfig}>
+                <BarChart
+                  data={wasteData}
+                  margin={{
+                    top: 20,
+                    right: 30,
+                    left: 20,
+                    bottom: 5,
+                  }}
+                >
+                  <CartesianGrid strokeDasharray="3 3" />
+                  <XAxis dataKey="month" />
+                  <YAxis />
+                  <ChartTooltip
+                    content={(props) => <ChartTooltipContent {...props} />}
+                  />
+                  <Bar dataKey="plastic" stackId="a" fill="var(--color-plastic)" />
+                  <Bar dataKey="paper" stackId="a" fill="var(--color-paper)" />
+                  <Bar dataKey="glass" stackId="a" fill="var(--color-glass)" />
+                  <Bar dataKey="other" stackId="a" fill="var(--color-other)" />
+                  <ChartLegend
+                    content={(props) => <ChartLegendContent {...props} />}
+                  />
+                </BarChart>
+              </ChartContainer>
+            </CardContent>
+          </Card>
+        </TabsContent>
+        
+        <TabsContent value="efficiency">
+          <Card>
+            <CardHeader>
+              <CardTitle>System Efficiency</CardTitle>
+              <CardDescription>Weekly system performance metrics</CardDescription>
+            </CardHeader>
+            <CardContent className="pt-2 h-80">
+              <ResponsiveContainer width="100%" height="100%">
+                <LineChart
+                  data={efficiencyData}
+                  margin={{
+                    top: 5,
+                    right: 30,
+                    left: 20,
+                    bottom: 5,
+                  }}
+                >
+                  <CartesianGrid strokeDasharray="3 3" />
+                  <XAxis dataKey="name" />
+                  <YAxis />
+                  <Tooltip />
+                  <Legend />
+                  <Line
+                    type="monotone"
+                    dataKey="efficiency"
+                    stroke="#0ea5e9"
+                    activeDot={{ r: 8 }}
+                  />
+                </LineChart>
+              </ResponsiveContainer>
+            </CardContent>
+          </Card>
+        </TabsContent>
+      </Tabs>
     </div>
   );
 };
 
-export default Analytics;
+export default AnalyticsComponent;
