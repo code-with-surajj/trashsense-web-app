@@ -44,13 +44,13 @@ const CTA = () => {
                   <label htmlFor="firstName" className="block text-sm font-medium text-gray-700 mb-1">
                     First Name
                   </label>
-                  <Input id="firstName" placeholder="John" className="bg-gray-50 border-gray-200" />
+                  <Input id="firstName" placeholder="John" className="bg-gray-50 border-gray-200 text-black" />
                 </div>
                 <div>
                   <label htmlFor="lastName" className="block text-sm font-medium text-gray-700 mb-1">
                     Last Name
                   </label>
-                  <Input id="lastName" placeholder="Doe" className="bg-gray-50 border-gray-200" />
+                  <Input id="lastName" placeholder="Doe" className="bg-gray-50 border-gray-200 text-black" />
                 </div>
               </div>
               
@@ -58,14 +58,14 @@ const CTA = () => {
                 <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1">
                   Email
                 </label>
-                <Input id="email" type="email" placeholder="john@example.com" className="bg-gray-50 border-gray-200" />
+                <Input id="email" type="email" placeholder="john@example.com" className="bg-gray-50 border-gray-200 text-black" />
               </div>
               
               <div>
                 <label htmlFor="organization" className="block text-sm font-medium text-gray-700 mb-1">
                   Organization (Optional)
                 </label>
-                <Input id="organization" placeholder="Company name" className="bg-gray-50 border-gray-200" />
+                <Input id="organization" placeholder="Company name" className="bg-gray-50 border-gray-200 text-black" />
               </div>
               
               <div>
@@ -74,7 +74,7 @@ const CTA = () => {
                 </label>
                 <select 
                   id="interest"
-                  className="w-full rounded-md border border-gray-200 bg-gray-50 px-3 py-2 text-sm"
+                  className="w-full rounded-md border border-gray-200 bg-gray-50 px-3 py-2 text-sm text-black"
                 >
                   <option>Home solution</option>
                   <option>Business solution</option>
