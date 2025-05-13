@@ -122,14 +122,8 @@ const AnalyticsComponent = () => {
                   <Bar dataKey="paper" stackId="a" fill="var(--color-paper)" />
                   <Bar dataKey="glass" stackId="a" fill="var(--color-glass)" />
                   <Bar dataKey="other" stackId="a" fill="var(--color-other)" />
-                  <Legend 
-                    content={(props) => {
-                      if (props && props.payload) {
-                        return <ChartLegendContent {...props} />;
-                      }
-                      return null;
-                    }}
-                  />
+                  {/* Use Legend without custom content to avoid TypeScript errors */}
+                  <Legend />
                 </BarChart>
               </ChartContainer>
             </CardContent>
