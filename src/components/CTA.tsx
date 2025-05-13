@@ -1,11 +1,8 @@
-
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { ArrowRight, CheckCircle } from "lucide-react";
-
 const CTA = () => {
-  return (
-    <section className="bg-gradient-to-r from-trashsense-primary to-trashsense-secondary py-20 text-white">
+  return <section className="bg-gradient-to-r from-trashsense-primary to-trashsense-secondary py-20 text-white">
       <div className="container">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
           <div>
@@ -26,12 +23,12 @@ const CTA = () => {
                 <p>Reduce your environmental footprint with smart recycling</p>
               </div>
               <div className="flex items-center">
-                <CheckCircle className="h-5 w-5 mr-2 text-white" />
-                <p>30-day money-back guarantee</p>
+                
+                
               </div>
               <div className="flex items-center">
-                <CheckCircle className="h-5 w-5 mr-2 text-white" />
-                <p>Free shipping and professional installation</p>
+                
+                
               </div>
             </div>
           </div>
@@ -72,10 +69,7 @@ const CTA = () => {
                 <label htmlFor="interest" className="block text-sm font-medium text-gray-700 mb-1">
                   I'm interested in
                 </label>
-                <select 
-                  id="interest"
-                  className="w-full rounded-md border border-gray-200 bg-gray-50 px-3 py-2 text-sm text-black"
-                >
+                <select id="interest" className="w-full rounded-md border border-gray-200 bg-gray-50 px-3 py-2 text-sm text-black">
                   <option>Home solution</option>
                   <option>Business solution</option>
                   <option>Enterprise solution</option>
@@ -95,8 +89,6 @@ const CTA = () => {
           </div>
         </div>
       </div>
-    </section>
-  );
+    </section>;
 };
-
 export default CTA;
