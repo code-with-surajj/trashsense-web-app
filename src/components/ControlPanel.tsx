@@ -5,7 +5,8 @@ import { Button } from "@/components/ui/button";
 import { Switch } from "@/components/ui/switch";
 import { Label } from "@/components/ui/label";
 import { Checkbox } from "@/components/ui/checkbox";
-import { Trash2, RotateCw, Power, Settings, AlertTriangle } from "lucide-react";
+import { Input } from "@/components/ui/input";
+import { Trash2, RotateCw, Power, Settings, AlertTriangle, Link, LinkOff } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 
 const ControlPanel = () => {
@@ -19,6 +20,9 @@ const ControlPanel = () => {
   });
   const [maintenanceMode, setMaintenanceMode] = useState(false);
   const [recalibrating, setRecalibrating] = useState(false);
+  const [binConnected, setBinConnected] = useState(false);
+  const [binId, setBinId] = useState("");
+  const [connecting, setConnecting] = useState(false);
 
   const toggleCompartment = (type: keyof typeof compartments) => {
     if (!autoMode) {
@@ -91,9 +95,95 @@ const ControlPanel = () => {
     });
   };
 
+  const handleConnectBin = () => {
+    if (!binId.trim()) {
+      toast({
+        title: "Error",
+        description: "Please enter a valid bin ID",
+        variant: "destructive",
+        duration: 3000,
+      });
+      return;
+    }
+
+    setConnecting(true);
+    
+    // Simulate connection process
+    setTimeout(() => {
+      setConnecting(false);
+      setBinConnected(true);
+      toast({
+        title: "Bin Connected",
+        description: `Successfully connected to bin ${binId}`,
+        duration: 3000,
+      });
+    }, 2000);
+  };
+
+  const handleDisconnectBin = () => {
+    setBinConnected(false);
+    toast({
+      title: "Bin Disconnected",
+      description: `Connection to bin ${binId} has been terminated`,
+      duration: 3000,
+    });
+  };
+
   return (
     <div className="flex flex-col gap-6 p-4 md:p-6">
       <h1 className="text-3xl font-bold">Control Panel</h1>
+
+      {/* Bin connection card */}
+      <Card>
+        <CardHeader>
+          <CardTitle>Bin Connectivity</CardTitle>
+          <CardDescription>Connect to physical waste bin by unique ID</CardDescription>
+        </CardHeader>
+        <CardContent className="space-y-4">
+          <div className="flex items-center gap-4">
+            <div className={`h-3 w-3 rounded-full ${binConnected ? 'bg-green-500' : 'bg-red-500'}`}></div>
+            <p className="text-sm">Status: {binConnected ? `Connected to bin ${binId}` : 'Disconnected'}</p>
+          </div>
+          
+          {!binConnected ? (
+            <div className="flex flex-col sm:flex-row gap-2">
+              <Input 
+                placeholder="Enter bin unique ID" 
+                value={binId} 
+                onChange={(e) => setBinId(e.target.value)}
+                className="flex-grow"
+                disabled={connecting}
+              />
+              <Button 
+                onClick={handleConnectBin} 
+                disabled={connecting || !binId.trim()}
+                className="whitespace-nowrap"
+              >
+                {connecting ? (
+                  <>
+                    <span className="animate-spin mr-2">⚙️</span>
+                    Connecting...
+                  </>
+                ) : (
+                  <>
+                    <Link className="h-4 w-4 mr-2" />
+                    Connect Bin
+                  </>
+                )}
+              </Button>
+            </div>
+          ) : (
+            <Button 
+              variant="destructive" 
+              onClick={handleDisconnectBin}
+              className="w-full sm:w-auto"
+            >
+              <LinkOff className="h-4 w-4 mr-2" />
+              Disconnect Bin
+            </Button>
+          )}
+        </CardContent>
+      </Card>
 
       {/* Main control card */}
       <Card>
