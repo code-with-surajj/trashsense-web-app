@@ -110,12 +110,26 @@ const AnalyticsComponent = () => {
                   <CartesianGrid strokeDasharray="3 3" />
                   <XAxis dataKey="month" />
                   <YAxis />
-                  <Tooltip content={props => <ChartTooltipContent {...props} />} />
+                  <Tooltip 
+                    content={({ active, payload, label }) => {
+                      if (active && payload && payload.length) {
+                        return <ChartTooltipContent active={active} payload={payload} label={label} />;
+                      }
+                      return null;
+                    }}
+                  />
                   <Bar dataKey="plastic" stackId="a" fill="var(--color-plastic)" />
                   <Bar dataKey="paper" stackId="a" fill="var(--color-paper)" />
                   <Bar dataKey="glass" stackId="a" fill="var(--color-glass)" />
                   <Bar dataKey="other" stackId="a" fill="var(--color-other)" />
-                  <Legend content={props => <ChartLegendContent {...props} />} />
+                  <Legend 
+                    content={(props) => {
+                      if (props && props.payload) {
+                        return <ChartLegendContent {...props} />;
+                      }
+                      return null;
+                    }}
+                  />
                 </BarChart>
               </ChartContainer>
             </CardContent>
