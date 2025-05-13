@@ -26,10 +26,10 @@ const efficiencyData = [
 ];
 
 const chartConfig = {
-  plastic: { label: "Plastic", theme: { light: "#0ea5e9" } },
-  paper: { label: "Paper", theme: { light: "#10b981" } },
-  glass: { label: "Glass", theme: { light: "#8b5cf6" } },
-  other: { label: "Other", theme: { light: "#f59e0b" } },
+  plastic: { label: "Plastic", theme: { light: "#0ea5e9", dark: "#38bdf8" } },
+  paper: { label: "Paper", theme: { light: "#10b981", dark: "#34d399" } },
+  glass: { label: "Glass", theme: { light: "#8b5cf6", dark: "#a78bfa" } },
+  other: { label: "Other", theme: { light: "#f59e0b", dark: "#fbbf24" } },
 };
 
 const AnalyticsComponent = () => {
@@ -110,16 +110,12 @@ const AnalyticsComponent = () => {
                   <CartesianGrid strokeDasharray="3 3" />
                   <XAxis dataKey="month" />
                   <YAxis />
-                  <ChartTooltip
-                    content={(props) => <ChartTooltipContent {...props} />}
-                  />
+                  <Tooltip content={props => <ChartTooltipContent {...props} />} />
                   <Bar dataKey="plastic" stackId="a" fill="var(--color-plastic)" />
                   <Bar dataKey="paper" stackId="a" fill="var(--color-paper)" />
                   <Bar dataKey="glass" stackId="a" fill="var(--color-glass)" />
                   <Bar dataKey="other" stackId="a" fill="var(--color-other)" />
-                  <ChartLegend
-                    content={(props) => <ChartLegendContent {...props} />}
-                  />
+                  <Legend content={props => <ChartLegendContent {...props} />} />
                 </BarChart>
               </ChartContainer>
             </CardContent>

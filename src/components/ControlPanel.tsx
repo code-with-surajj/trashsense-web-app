@@ -1,4 +1,3 @@
-
 import React, { useState } from "react";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -6,7 +5,7 @@ import { Switch } from "@/components/ui/switch";
 import { Label } from "@/components/ui/label";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Input } from "@/components/ui/input";
-import { Trash2, RotateCw, Power, Settings, AlertTriangle, Link, LinkOff } from "lucide-react";
+import { Trash2, RotateCw, Power, Settings, AlertTriangle, Link, Link2Off } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 
 const ControlPanel = () => {
@@ -178,7 +177,7 @@ const ControlPanel = () => {
               onClick={handleDisconnectBin}
               className="w-full sm:w-auto"
             >
-              <LinkOff className="h-4 w-4 mr-2" />
+              <Link2Off className="h-4 w-4 mr-2" />
               Disconnect Bin
             </Button>
           )}
